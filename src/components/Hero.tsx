@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { HERO, TERMINAL, type Mode } from '../data'
-import { Fingers, Smiley } from './Icons'
+import { useEffect, useState } from "react";
+import { HERO, TERMINAL, type Mode } from "../data";
+import { Fingers, Smiley } from "./Icons";
 
 export default function Hero({ mode }: { mode: Mode }) {
   return (
@@ -22,7 +22,7 @@ export default function Hero({ mode }: { mode: Mode }) {
 
       <Terminal mode={mode} />
     </div>
-  )
+  );
 }
 
 /**
@@ -30,20 +30,20 @@ export default function Hero({ mode }: { mode: Mode }) {
  * "bugs resolvidos" fica parado — o asterisco já explica tudo.
  */
 function Terminal({ mode }: { mode: Mode }) {
-  const [drift, setDrift] = useState(0)
+  const [drift, setDrift] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = setInterval(() => setDrift((n) => n + 1), 2600)
-    return () => clearInterval(id)
-  }, [])
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setDrift((n) => n + 1), 2600);
+    return () => clearInterval(id);
+  }, []);
 
   const jitter = (value: number, i: number) => {
-    if (i > 1) return value
-    // variação determinística e pequena, só pra dar sinal de vida
-    const wave = Math.sin(drift * (i + 1.7)) * 3
-    return Math.max(0, Math.min(100, Math.round(value + wave)))
-  }
+    if (i > 1) return value;
+    // variação determinística e pequena, só pra dar sinal de vida.
+    const wave = Math.sin(drift * (i + 1.7)) * 3;
+    return Math.max(0, Math.min(100, Math.round(value + wave)));
+  };
 
   return (
     <aside className="terminal" aria-label="status atual">
@@ -75,5 +75,5 @@ function Terminal({ mode }: { mode: Mode }) {
         <Fingers />
       </p>
     </aside>
-  )
+  );
 }
