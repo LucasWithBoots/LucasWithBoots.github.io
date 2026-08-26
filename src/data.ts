@@ -222,26 +222,6 @@ export const PROJECTS: Project[] = [
       pro: "pesquisa → protótipo",
     },
   },
-
-  {
-    id: "kotlintodo",
-    name: "KotlinToDoAPI",
-    logo: { text: "K", variant: "accent" },
-    repo: "https://github.com/LucasWithBoots/KotlinToDoAPI",
-
-    description: {
-      meme: "porque fazer um CRUD simples seria fácil demais",
-
-      pro: "Aplicação full stack para gerenciamento de tarefas, com API backend, autenticação, filtros e interface web integrada.",
-    },
-
-    tags: ["Spring Boot", "Kotlin", "Angular", "TypeScript"],
-
-    note: {
-      meme: "CRUD com ambições",
-      pro: "full stack",
-    },
-  },
 ];
 
 // Texto de apresentação, aberto por sua conta. Cada item do array vira um
