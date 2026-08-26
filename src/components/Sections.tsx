@@ -1,4 +1,5 @@
 import {
+  ABOUT,
   BUGS,
   HEADINGS,
   LINKS,
@@ -6,10 +7,33 @@ import {
   STACK,
   TIMELINE,
   type Mode,
+  type Project,
 } from '../data'
+import { logoUrl } from '../logos'
 import { BugArt, Check, GitHub, LinkedIn, Mail } from './Icons'
 
 type ModeProps = { mode: Mode }
+
+/**
+ * Mostra a imagem do logo quando existe arquivo em src/assets/logos/, e cai
+ * pras letras quando não existe. O container é decorativo: o nome do projeto
+ * já está no título logo ao lado, então repetir aqui só polui o leitor de tela.
+ */
+function ProjectLogo({ logo }: { logo: Project['logo'] }) {
+  const url = logoUrl(logo.src)
+
+  return (
+    <div
+      className="logo"
+      data-variant={logo.variant}
+      data-image={Boolean(url)}
+      data-fit={logo.fit ?? 'contain'}
+      aria-hidden="true"
+    >
+      {url ? <img src={url} alt="" loading="lazy" /> : logo.text}
+    </div>
+  )
+}
 
 /* -------------------------------------------------------------- 01 */
 export function Work({ mode }: ModeProps) {
@@ -19,13 +43,32 @@ export function Work({ mode }: ModeProps) {
 
       <div className="cards">
         {PROJECTS.map((project) => (
-          <article className="card" key={project.id}>
-            <div className="logo" data-variant={project.logo.variant} aria-hidden="true">
-              {project.logo.text}
-            </div>
+          <article className="card" data-link={Boolean(project.repo)} key={project.id}>
+            <ProjectLogo logo={project.logo} />
 
             <div>
-              <h3>{project.name}</h3>
+              {/*
+                O link mora no título e se estica por cima do card inteiro via
+                CSS. Assim clica em qualquer lugar, mas quem usa leitor de tela
+                ouve "UniCarona" em vez do card inteiro lido como um link só.
+              */}
+              <h3>
+                {project.repo ? (
+                  <a
+                    className="card-link"
+                    href={project.repo}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {project.name}
+                    <span className="arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                ) : (
+                  project.name
+                )}
+              </h3>
               <p>{project.description[mode]}</p>
               <ul className="tags">
                 {project.tags.map((tag) => (
@@ -54,6 +97,12 @@ export function Lore({ mode }: ModeProps) {
   return (
     <section className="measure">
       <h2>{HEADINGS.lore[mode]}</h2>
+
+      <div className="about">
+        {ABOUT[mode].map((paragraph) => (
+          <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+        ))}
+      </div>
 
       <ol className="timeline">
         {TIMELINE.map((entry) => (
