@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
   {
     id: "unicarona",
     name: "UniCarona",
-    logo: { text: "U", variant: "accent" },
+    logo: { text: "U", variant: "accent", src: "unicarona.png", fit: "cover" },
     repo: "https://github.com/LucasWithBoots/unicarona",
 
     description: {
@@ -206,7 +206,7 @@ export const PROJECTS: Project[] = [
   {
     id: "sabia",
     name: "Sabiá",
-    logo: { text: "S", variant: "outline" },
+    logo: { text: "S", variant: "outline", src: "sabia.png", fit: "cover" },
     repo: "https://medium.com/@claudiolmontez/estudo-de-caso-ux-ui-design-sabi%C3%A1-como-incentivar-jovens-e-adolescentes-a-conhecerem-mais-sobre-5b9e302e5945",
 
     description: {
