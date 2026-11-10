@@ -19,16 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      # o site vive na raiz de lucaswithboots.github.io, então não precisa de base path
-      - run: npm run build
+      # site em HTML puro: publica os arquivos da raiz como estão, sem build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: .
 
   deploy:
     needs: build
